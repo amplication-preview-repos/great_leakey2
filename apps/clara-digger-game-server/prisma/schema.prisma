@@ -1,0 +1,74 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Ghost {
+  createdAt DateTime            @default(now())
+  direction EnumGhostDirection?
+  id        String              @id @default(cuid())
+  isDead    Boolean?
+  name      String?
+  speed     Int?
+  updatedAt DateTime            @updatedAt
+}
+
+model Clara {
+  createdAt    DateTime            @default(now())
+  currentLevel String?
+  direction    EnumClaraDirection?
+  id           String              @id @default(cuid())
+  isDead       Boolean?
+  name         String?
+  updatedAt    DateTime            @updatedAt
+}
+
+model Level {
+  createdAt   DateTime @default(now())
+  id          String   @id @default(cuid())
+  levelData   Json?
+  numberField Int?
+  updatedAt   DateTime @updatedAt
+}
+
+model GoldSack {
+  createdAt  DateTime           @default(now())
+  id         String             @id @default(cuid())
+  isOnGround Boolean?
+  positionX  Int?
+  positionY  Int?
+  state      EnumGoldSackState?
+  updatedAt  DateTime           @updatedAt
+}
+
+model Leaf {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  positionX Int?
+  positionY Int?
+  updatedAt DateTime @updatedAt
+}
+
+model EarthPatch {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  positionX Int?
+  positionY Int?
+  updatedAt DateTime @updatedAt
+}
+
+enum EnumGhostDirection {
+  Option1
+}
+
+enum EnumClaraDirection {
+  Option1
+}
+
+enum EnumGoldSackState {
+  Option1
+}
